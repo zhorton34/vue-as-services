@@ -143,7 +143,7 @@ class VueServiceContainer {
 
 ;(function() {
     this.CreateVueApp = function(config = {}, container = false) {
-        return new VueServices(config, container)        
+        return new VueServiceContainer(config, container)        
     }
 }.call(window))
 
