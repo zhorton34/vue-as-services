@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default class VueServices {
+class VueServiceContainer {
     constructor(config = {}, container) {
         this.config = config
         this.registeringCallbacks = []
@@ -131,6 +131,23 @@ export default class VueServices {
             this.RootInstance.set(withRootInstanceOptions)
         }
 
-        this.app = new Vue(this.RootInstance.options)
+        if (this.RootInstance.options.render) {
+            const { el } = this.RootInstance.options
+            this.app = new Vue(this.RootInstance.options).$mount(el)
+        }
+        else {
+            this.app = new Vue(this.RootInstance.options)
+        }
     }
 }
+
+;(function() {
+    this.CreateVueApp = function(config = {}, container = false) {
+        return new VueServices(config, container)        
+    }
+}.call(window))
+
+exports.CreateVueServiceContainer = function(config = {}, container = false) {
+    return CreateVueApp(config, container)
+}
+

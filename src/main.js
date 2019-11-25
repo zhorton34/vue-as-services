@@ -1,18 +1,6 @@
 var exports=module.exports={};
-import VueServices from '@Boot/vue-services'
 
-/*
- * Register Callback To Create Mercator Admin So We Can Handle
- * Bootable Events Before Creating Our Vue Instance
- */
-;(function() {
-    this.CreateVueApp = function(config = {}, container = false) {
-    	return new VueServices(config, container)    	 
-    }
-}.call(window))
-
-exports.CreateVueServiceContainer = CreateVueApp
-
+require('@Boot/vue-services')
 
 // ~~~~~~~~~~~~~~~~~
 // Example Usage
@@ -38,7 +26,7 @@ exports.CreateVueServiceContainer = CreateVueApp
 // 1. import { CreateVueServiceContainer } from 'vue-as-services'
 
 // 2. Create vue container
-// window.Container = VueServiceContainer(DEFAULT.options, DEFAULT.container)
+// window.Container = CreateVueServiceContainer(DEFAULT.options, DEFAULT.container)
 
 // 3. Provide Register callbacks  
 // Container.registering(({ container, Vue }) => {
