@@ -12550,6 +12550,41 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./node_modules/webpack/buildin/harmony-module.js":
+/*!*******************************************!*\
+  !*** (webpack)/buildin/harmony-module.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if (!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
 /***/ "./src/bootstrap/vue-services.js":
 /*!***************************************!*\
   !*** ./src/bootstrap/vue-services.js ***!
@@ -12794,7 +12829,8 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Boot_vue_services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @Boot/vue-services */ "./src/bootstrap/vue-services.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _Boot_vue_services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @Boot/vue-services */ "./src/bootstrap/vue-services.js");
+var exports = module.exports = {};
 
 (function () {
   this.CreateVueApp = function () {
@@ -12803,50 +12839,51 @@ __webpack_require__.r(__webpack_exports__);
     return new _Boot_vue_services__WEBPACK_IMPORTED_MODULE_0__["default"](config, container);
   };
 }).call(window);
-var DEFAULT = {
-  options: {
-    info: 'options object can be data passed in from php and json encoded so you can use php data in your register or boot callbacks',
-    app: {
-      title: 'Example Title',
-      description: 'Example Description'
-    }
-  },
-  container: {
-    bootingCallbacks: [],
-    registeringCallbacks: [],
-    rootInstanceOptions: {
-      el: '#app',
-      name: 'vue-services-application'
-    }
-  }
-};
-window.Container = CreateVueApp(DEFAULT.options, DEFAULT.container);
-Container.registering(function (_ref) {
-  var container = _ref.container,
-      Vue = _ref.Vue;
-  var $Event = new Vue();
-  $Event.listen = $Event.$on;
-  $Event.fire = $Event.$emit;
-  $Event.listenOnce = $Event.$once;
-  $Event.forget = $Event.$off;
-  Vue.prototype['$Event'] = $Event;
-  container['$Event'] = $Event;
-});
-Container.booting(function (_ref2) {
-  var container = _ref2.container,
-      Vue = _ref2.Vue;
-  Vue.component('hello-world', {
-    data: function data() {
-      return {
-        title: 'hello world'
-      };
-    }
-  });
-});
-Container.launch({
-  el: '#app',
-  name: 'vue-services-application'
-});
+exports.CreateVueServiceContainer = CreateVueApp; // ~~~~~~~~~~~~~~~~~
+// Example Usage
+// ~~~~~~~~~~~~~~~~~~
+//  const DEFAULT = {
+// 		options: {
+// 			info: 'options object can be data passed in from php and json encoded so you can use php data in your register or boot callbacks',
+// 			app: {
+// 				title: 'Example Title',
+// 				description: 'Example Description'
+// 			}
+// 		},
+//  	container: {
+// 			bootingCallbacks: [],
+//  		registeringCallbacks: [],
+//  		rootInstanceOptions: {
+//  			el: '#app',
+//  			name: 'vue-services-application',
+//  		}
+// 		}
+// 	}
+// 1. import { CreateVueServiceContainer } from 'vue-as-services'
+// 2. Create vue container
+// window.Container = VueServiceContainer(DEFAULT.options, DEFAULT.container)
+// 3. Provide Register callbacks  
+// Container.registering(({ container, Vue }) => {
+// 	const $Event = new Vue()
+// 	$Event.listen = $Event.$on
+// 	$Event.fire = $Event.$emit
+// 	$Event.listenOnce = $Event.$once 
+// 	$Event.forget = $Event.$off 
+// 	Vue.prototype['$Event'] = $Event
+// 	container['$Event'] = $Event
+// })
+// 4. Provide booting callbacks
+// Container.booting(({ container, Vue }) => {
+// 	Vue.component('hello-world', {
+// 		data: () => ({ title: 'hello world' })
+// 	})
+// })
+// 5. Launch app with defined root instance
+// Container.launch({
+// 	el: '#app',
+// 	name: 'vue-services-application',
+// })
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
